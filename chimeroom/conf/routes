@@ -4,15 +4,14 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET	/rooms			    controllers.Application.getRooms()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET     /home                   controllers.Application.home()
-GET     /create                 controllers.Application.create()
+GET     /create                 controllers.Application.createRoom()
 GET     /delete                 controllers.Application.delete()
 
 GET     /repeat                 controllers.RepeatApp.startParrot()
-	
-	
+
+GET     /rooms                  controllers.Application.getRooms()

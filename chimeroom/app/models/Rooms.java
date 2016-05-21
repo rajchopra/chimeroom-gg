@@ -16,18 +16,30 @@ public class Rooms extends Model {
 
     public Long Capacity;
 
-    public String Location;
+    public String Floor;
 
     public String Status;
 
-    public Long Level;
+    public Long Accesslevel;
 
     public String Facilities;
+
 
     public static Finder<Long, Rooms> find = new Finder<Long, Rooms>(Long.class, Rooms.class);
 
     public static List<Rooms> getAll() {
-        return
-	    find.where().eq("status", "active").findList();
+        return find.where().eq("status", "active").findList();
+    }
+
+    public static Rooms createRoom(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
+	Rooms room = new Rooms();
+        room.Name = Name;
+        room.Capacity = Capacity;
+        room.Floor = Floor;
+        room.Status = "active";
+        room.Accesslevel = AccessLevel;
+        room.Facilities = Facilities;
+        room.save();
+        return room;
     }
 }

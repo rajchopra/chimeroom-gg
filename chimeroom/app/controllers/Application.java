@@ -3,7 +3,7 @@ package controllers;
 import play.*;
 import play.mvc.*;
 
-import models.Test;
+import models.Rooms;
 import java.util.*;
 
 import views.html.*;
@@ -24,7 +24,8 @@ public class Application extends Controller {
         return ok(homepage.render(txt));
     }
 
-    public static Result create() {
+    public static Result createRoom() {
+	Rooms r = Rooms.createRoom("RoomName", new Long(10), "GroundFloor", null, "{Projector:true}");
         return ok(createroom.render("Yay!! Happy to create a new room for you.", "Hello"));
     }
 
