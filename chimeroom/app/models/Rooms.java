@@ -43,15 +43,22 @@ public class Rooms extends Model {
         return room;
     }
 
-    public status Rooms modifyRoom(Long Id, String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
+    public static Rooms modifyRoom(Long Id, String Name, Long Capacity, String Floor, String Status, Long AccessLevel, String Facilities) {
 	Rooms room = find.byId(Id);
         room.Name = Name;
         room.Capacity = Capacity;
         room.Floor = Floor;
-        room.Status = "active";
+        room.Status = Status;
         room.Accesslevel = AccessLevel;
         room.Facilities = Facilities;
         room.update();
         return room;
     }
+
+    public static void deleteRoom(Long Id) {
+        Rooms room = find.ById(Id);
+	room.delete();
+	return
+    }
+
 }

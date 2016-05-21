@@ -49,4 +49,10 @@ public class Rooms extends Controller {
         return ok(createroom.render("Yay!! Happy to create a new room for you.", "Hello")); //TODO: Change this
     }
 
+    public static Result delete() {
+        id = new Long(1); //TODO: Get this from User
+	Rooms.delete(id);
+        return ok(createroom.render("Yay!! Happy to create a new room for you.", "Hello")); //TODO: Change this
+    }
+
 }
