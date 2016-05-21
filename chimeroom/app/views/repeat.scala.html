@@ -1,0 +1,20 @@
+@(name: String, repeatText: String, repeat: Int, color: String)
+
+@main("Result Page") {
+    
+    <p>
+        Hey @name!! Here is the result. <br>
+    </p>
+
+
+    <ul style="color: @if(color != null) { @color } else { inherited }">
+        @for(i <- 1 to repeat) {
+            <li>@i @repeatText!</li>
+        }
+    </ul>
+    
+    <p class="buttons">
+        <a href="@routes.RepeatApp.startParrot">Back to the form</a>
+    </p>
+    
+}
