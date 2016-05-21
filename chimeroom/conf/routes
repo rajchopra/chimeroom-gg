@@ -10,9 +10,9 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET     /home                   controllers.Application.home()
 GET     /delete                 controllers.Application.delete()
-GET     /repeat                 controllers.RepeatApp.startParrot()
 
 # For ConfRoom
 GET     /rooms                  controllers.Rooms.getRooms()
-POST	/room   		controllers.Rooms.create()
+GET 	/create   		controllers.Rooms.index()
+POST 	/create   		controllers.Rooms.create()
 POST	/modifyroom		controllers.Rooms.modify()

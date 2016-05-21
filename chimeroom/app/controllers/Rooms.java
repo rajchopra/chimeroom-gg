@@ -1,12 +1,14 @@
 package controllers;
 
-import play.*;
 import play.mvc.*;
+import play.data.*;
 import static play.data.Form.*;
 import play.data.validation.Constraints.*;
 
-import models.Rooms;
 import views.html.*;
+import models.RoomsModel;
+import java.util.*;
+
 
 public class Rooms extends Controller {
 
@@ -16,35 +18,41 @@ public class Rooms extends Controller {
     public static class ConfRoom {
         public String name;
         public Long capacity;
-	public Long floor;
-	public String status;
-	public Long accesslevel;
+    	public String floor;
+    	public String status;
+    	public Long accesslevel;
 	
         public String whiteboard;
-	public String projector;
-	public String internet;
-	public String wifi;
-	public String intercom;
-	public String teleconferencing;
-	public String videoconferencing;
+    	public String projector;
+    	public String internet;
+    	public String wifi;
+    	public String intercom;
+    	public String teleconferencing;
+    	public String videoconferencing;
     } 
 
     
+    public static Result index() {
+        return ok(
+            createconfroomform.render(form(ConfRoom.class))
+        );
+    }
+  
     public static Result create() {
-	Form<ConfRoom> form = form(ConfRoom.class).bindFromRequest();
-	ConfRoom data = null;
-	if(form.hasErrors()) {
+	    Form<ConfRoom> form = form(ConfRoom.class).bindFromRequest();
+        ConfRoom data = null;
+        if(form.hasErrors()) {
             return badRequest(createconfroomform.render(form));
         } 
         data = form.get();
-        Rooms r = Rooms.createRoom(name, capacity, floor, accesslevel, facilities);
+        RoomsModel r = RoomsModel.createRoom(data.name, data.capacity, data.floor, data.accesslevel, "");
 	
         return ok(index.render("Your new application is ready."));
     }
 
     public static Result getRooms() {
-        List <Rooms> r = Rooms.getAll();
-        return ok(hello.render("Find All active rooms: ", r.get(0).Name));
+        List<RoomsModel> r = RoomsModel.getAll();
+        return ok(hello.render("Find All active roomsModel: ", r.get(0).Name));
     }
 
     public static Result home() {
@@ -53,14 +61,14 @@ public class Rooms extends Controller {
     }
 
     public static Result modify() {
-        id = new Long(1); //TODO: Get this. Rest of the original values should be passed as is.
-        Rooms r = Rooms.modifyRoom(id, "RoomName", new Long(10), "GroundFloor", null, "{Projector:true}");
+        Long id = new Long(1); //TODO: Get this. Rest of the original values should be passed as is.
+        RoomsModel r = RoomsModel.modifyRoom(id, "RoomName", new Long(10), "GroundFloor", "active", null, "{Projector:true}");
         return ok(createroom.render("Yay!! Happy to create a new room for you.", "Hello")); //TODO: Change this
     }
 
     public static Result delete() {
-        id = new Long(1); //TODO: Get this from User
-	Rooms.delete(id);
+        Long id = new Long(1); //TODO: Get this from User
+	RoomsModel.deleteRoom(id);
         return ok(createroom.render("Yay!! Happy to create a new room for you.", "Hello")); //TODO: Change this
     }
 

@@ -8,7 +8,8 @@ import play.data.validation.Constraints.*;
 import javax.persistence.*;
 
 @Entity
-public class Rooms extends Model {
+@Table(name="rooms")
+public class RoomsModel extends Model {
     @Id
     public Long Id;
 
@@ -25,14 +26,14 @@ public class Rooms extends Model {
     public String Facilities;
 
 
-    public static Finder<Long, Rooms> find = new Finder<Long, Rooms>(Long.class, Rooms.class);
+    public static Finder<Long, RoomsModel> find = new Finder<Long, RoomsModel>(Long.class, RoomsModel.class);
 
-    public static List<Rooms> getAll() {
+    public static List<RoomsModel> getAll() {
         return find.where().eq("status", "active").findList();
     }
 
-    public static Rooms createRoom(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
-	Rooms room = new Rooms();
+    public static RoomsModel createRoom(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
+	RoomsModel room = new RoomsModel();
         room.Name = Name;
         room.Capacity = Capacity;
         room.Floor = Floor;
@@ -43,8 +44,8 @@ public class Rooms extends Model {
         return room;
     }
 
-    public static Rooms modifyRoom(Long Id, String Name, Long Capacity, String Floor, String Status, Long AccessLevel, String Facilities) {
-	Rooms room = find.byId(Id);
+    public static RoomsModel modifyRoom(Long Id, String Name, Long Capacity, String Floor, String Status, Long AccessLevel, String Facilities) {
+	RoomsModel room = find.byId(Id);
         room.Name = Name;
         room.Capacity = Capacity;
         room.Floor = Floor;
@@ -56,9 +57,9 @@ public class Rooms extends Model {
     }
 
     public static void deleteRoom(Long Id) {
-        Rooms room = find.ById(Id);
+        RoomsModel room = find.byId(Id);
 	room.delete();
-	return
+	return;
     }
 
 }
