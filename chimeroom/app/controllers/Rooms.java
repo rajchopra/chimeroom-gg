@@ -2,6 +2,8 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
+import static play.data.Form.*;
+import play.data.validation.Constraints.*;
 
 import models.Rooms;
 import views.html.*;
@@ -12,12 +14,19 @@ public class Rooms extends Controller {
      * Describes the hello form.
      */
     public static class ConfRoom {
-        @Required public String name;
-        @Required public Long capacity;
+        public String name;
+        public Long capacity;
 	public Long floor;
 	public String status;
 	public Long accesslevel;
-        public String facilities;
+	
+        public String whiteboard;
+	public String projector;
+	public String internet;
+	public String wifi;
+	public String intercom;
+	public String teleconferencing;
+	public String videoconferencing;
     } 
 
     
