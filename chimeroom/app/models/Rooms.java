@@ -42,4 +42,16 @@ public class Rooms extends Model {
         room.save();
         return room;
     }
+
+    public status Rooms modifyRoom(Long Id, String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
+	Rooms room = find.byId(Id);
+        room.Name = Name;
+        room.Capacity = Capacity;
+        room.Floor = Floor;
+        room.Status = "active";
+        room.Accesslevel = AccessLevel;
+        room.Facilities = Facilities;
+        room.update();
+        return room;
+    }
 }
