@@ -11,4 +11,8 @@ public class Application extends Controller {
         return ok(index.render("Your new application is ready."));
     }
 
+    public static Result getRooms() {
+        List <Rooms> r = Rooms.getAll();
+        return ok(hello.render("Find All active rooms: ", r.get(0).Name));
+    }
 }

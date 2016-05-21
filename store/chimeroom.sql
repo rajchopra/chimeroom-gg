@@ -6,7 +6,7 @@ CREATE TABLE `rooms` (
 	`capacity` TINYINT UNSIGNED NOT NULL,
 	`location` CHAR NOT NULL,
 	`status` enum('active', 'under-repair') COLLATE utf8_bin NOT NULL DEFAULT 'active',
-	`access_level` TINYINT UNSIGNED DEFAULT NULL,
+	`level` TINYINT UNSIGNED DEFAULT NULL,
 	`facilities` text COLLATE utf8_bin DEFAULT NULL,
 	PRIMARY KEY (`id`),
 	KEY `index_rq1` (`status`)
