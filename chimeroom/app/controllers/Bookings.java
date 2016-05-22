@@ -8,8 +8,9 @@ import play.data.validation.Constraints.*;
 import views.html.*;
 //import models.RoomsModel;
 import models.BookingsModel;
+import models.RoomsModel;
 import java.util.*;
-
+import java.text.*;
 
 public class Bookings extends Controller {
 
@@ -17,21 +18,23 @@ public class Bookings extends Controller {
      * Describes the booking form.
      */
     public static class BookingForm {
-        public Long Id;
-        public Long RoomId;
-        public Date StartDate;
-        public Date EndDate;
-        public Long EmpId;
-        public String Status;
-        public String Purpose;
-        public Long NumParticipants;
-        public String AdditionalInfo;
+        public Long bid;
+        public Long room_id;
+        public String start_date;
+        public String end_date;
+        public Long emp_id;
+        public String status;
+        public String purpose;
+        public Long num_participants;
+        public String details;
+
     } 
 
     //GET to createbooking() -> render form
     public static Result createindex() {
-        return ok(
-            createbookingform.render(form(BookingForm.class))
+        List<RoomsModel> r = RoomsModel.getAll();
+       return ok(
+           createbookingform.render(form(BookingForm.class), r )
         );
     }
   
@@ -39,23 +42,35 @@ public class Bookings extends Controller {
     public static Result create() {
         Form<BookingForm> form = form(BookingForm.class).bindFromRequest();
         BookingForm f = null;
+        List<RoomsModel> r = RoomsModel.getAll();
         if(form.hasErrors()) {
-            return badRequest(createbookingform.render(form));
+            return badRequest(createbookingform.render(form, r));
         } 
         f = form.get();
-        BookingsModel b = BookingsModel.create(f.RoomId, f.StartDate, f.EndDate, f.EmpId, f.Purpose, f.NumParticipants, f.AdditionalInfo);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        Date startDate = new Date();
+        Date endDate = new Date();
+        try {
+            startDate = format.parse(f.start_date);
+            endDate = format.parse(f.end_date);
+        } catch (ParseException e) {
+            //to do 
+        }
+
+        BookingsModel b = BookingsModel.create(f.room_id, startDate, endDate, f.emp_id, f.status, f.num_participants, f.details);
         return ok(index.render("Your booking has been received"));
     }
 
     public static Result get() {
-        List<BookingsModel> b = BookingsModel.get(new Long(1));
+        List<BookingsModel> b = BookingsModel.getAll();
         return ok(getbookings.render(b));
     }
 
     //GET to modifybooking() -> render form
     public static Result modifyindex() {
+        List<RoomsModel> r = RoomsModel.getAll();
         return ok(
-            modifybookingform.render(form(BookingForm.class))
+            modifybookingform.render(form(BookingForm.class), r)
         );
     }
   
@@ -64,17 +79,29 @@ public class Bookings extends Controller {
         Form<BookingForm> form = form(BookingForm.class).bindFromRequest(); //TODO: Change this to modify form
         BookingForm f = null;
         if (form.hasErrors()) {
-            return badRequest(modifybookingform.render(form)); //TODO: CHange this to modify form
+            List<RoomsModel> r = RoomsModel.getAll();
+            return badRequest(modifybookingform.render(form, r)); //TODO: CHange this to modify form
         }
         f = form.get();
-        BookingsModel b = BookingsModel.modify(f.Id, f.RoomId, f.StartDate, f.EndDate, f.EmpId, f.Purpose, f.NumParticipants, f.AdditionalInfo, f.Status);
-        return ok(hello.render("Modify Success", "title")); //TODO: Change this
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        Date startDate = new Date();
+        Date endDate = new Date();
+        try {
+            startDate = format.parse(f.start_date);
+            endDate = format.parse(f.end_date);
+        } catch (ParseException e) {
+            //to do 
+        }
+
+        BookingsModel b = BookingsModel.modify(f.bid, f.room_id, startDate, endDate, f.emp_id, f.purpose, f.num_participants, f.details, f.status);
+        return ok(index.render("Modify Success ")); //TODO: Change this
     }
 
     //GET to deletebooking() -> render form
     public static Result deleteindex() {
+        List<BookingsModel> b = BookingsModel.getAll();
         return ok(
-            deletebookingform.render(form(BookingForm.class))
+            deletebookingform.render(form(BookingForm.class), b)
         );
     }
   
@@ -83,11 +110,12 @@ public class Bookings extends Controller {
         Form<BookingForm> form = form(BookingForm.class).bindFromRequest(); //TODO: Change this to modify form
         BookingForm f = null;
         if (form.hasErrors()) {
-            return badRequest(deletebookingform.render(form)); //TODO: CHange this to modify form
+            List<BookingsModel> b = BookingsModel.getAll();
+            return badRequest(deletebookingform.render(form, b)); //TODO: CHange this to modify form
         }
         f = form.get();
-        BookingsModel.delete(f.Id);
-        return ok(hello.render("Delete Success", "Title")); //TODO: Change this
+        BookingsModel.delete(f.bid);
+        return ok(index.render("Delete Success ")); //TODO: Change this
     }
 
 }
