@@ -33,7 +33,7 @@ public class RoomsModel extends Model {
     }
 
     public static RoomsModel createRoom(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
-	RoomsModel room = new RoomsModel();
+        RoomsModel room = new RoomsModel();
         room.Name = Name;
         room.Capacity = Capacity;
         room.Floor = Floor;
@@ -45,7 +45,7 @@ public class RoomsModel extends Model {
     }
 
     public static RoomsModel modifyRoom(Long Id, String Name, Long Capacity, String Floor, String Status, Long AccessLevel, String Facilities) {
-	RoomsModel room = find.byId(Id);
+        RoomsModel room = find.byId(Id);
         room.Name = Name;
         room.Capacity = Capacity;
         room.Floor = Floor;
@@ -58,8 +58,8 @@ public class RoomsModel extends Model {
 
     public static void deleteRoom(Long Id) {
         RoomsModel room = find.byId(Id);
-	room.delete();
-	return;
+        room.delete();
+        return;
     }
 
 }

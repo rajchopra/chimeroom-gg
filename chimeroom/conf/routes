@@ -12,7 +12,7 @@ GET     /home                   controllers.Application.home()
 GET     /delete                 controllers.Application.delete()
 
 # For ConfRoom
-GET     /rooms                  controllers.Rooms.getRooms()
-GET 	/create   		controllers.Rooms.index()
-POST 	/create   		controllers.Rooms.create()
-POST	/modifyroom		controllers.Rooms.modify()
+GET     /getrooms                   controllers.Rooms.getRooms()
+GET     /create                     controllers.Rooms.createindex()
+POST    /create                     controllers.Rooms.create()
+POST    /modifyroom                 controllers.Rooms.modify()
