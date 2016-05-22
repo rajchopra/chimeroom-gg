@@ -5,7 +5,7 @@ CREATE TABLE `rooms` (
 	`name` VARCHAR(32) NOT NULL,
 	`capacity` TINYINT UNSIGNED NOT NULL,
 	`floor` VARCHAR(32) NOT NULL,
-	`status` enum('active', 'under-repair') COLLATE utf8_bin NOT NULL DEFAULT 'active',
+	`status` enum('active', 'under-repair', 'booked') COLLATE utf8_bin NOT NULL DEFAULT 'active',
 	`accesslevel` INT DEFAULT NULL,
 	`facilities` TEXT COLLATE utf8_bin DEFAULT NULL,
 	PRIMARY KEY (`id`),
@@ -22,7 +22,7 @@ CREATE TABLE `employees` (
 
 CREATE TABLE `bookings` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`room_id` INT NOT NULL,
+	`room_id` INT NULL,
 	`start_date` DATETIME NOT NULL,
 	`end_date` DATETIME NOT NULL,
 	`emp_id` INT NOT NULL,
