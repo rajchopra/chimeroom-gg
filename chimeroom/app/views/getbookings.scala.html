@@ -12,7 +12,16 @@
     </head>
     <body>
         @for(book <- bookings){
-            @book.Status <br>
+            <ul>
+            <li> @book.RoomId  </li>
+            <li> @book.StartDate  </li>
+            <li> @book.EndDate  </li>
+            <li> @book.EmpId  </li>
+            <li> @book.Status  </li>
+            <li> @book.Purpose  </li>
+            <li> @book.NumParticipants  </li>
+            <li> @book.Details  </li>
+            </ul>
         }
     </body>
 </html>

@@ -36,9 +36,14 @@ public class BookingsModel extends Model {
 
     public static Finder<Long, BookingsModel> find = new Finder<Long, BookingsModel>(Long.class, BookingsModel.class);
 
-    public static List<BookingsModel> get(Long Id) {
+    public static BookingsModel get(Long Id) {
+        return find.byId(Id);
+    }
+
+    public static List<BookingsModel> getAll() {
         return find.all();
     }
+
 
     public static List<BookingsModel> getAll(Date StartDate, Date EndDate, Long RoomId) {
         return find.where().eq("start_date", StartDate).eq("end_date", EndDate).eq("room_id", RoomId).findList();
@@ -73,9 +78,12 @@ public class BookingsModel extends Model {
     }
 
     public static void delete(Long Id) {
+        if (Id == null) {
+            return;
+        }
         BookingsModel b = find.byId(Id);
-	b.delete();
-	return;
+	    b.delete();
+	    return;
     }
 
 }

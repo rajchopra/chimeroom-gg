@@ -1,20 +1,68 @@
-@(createBookingForm: Form[controllers.Bookings.BookingForm])
-
+@(createBookingForm: Form[controllers.Bookings.BookingForm])(rooms: List[RoomsModel])
 @import helper._
 
 @main(title = "The 'create Booking' application") {
     
-    <h1>Enter Details to Create a new Conference Room</h1>
+    <h1>Enter Details to Create a new Booking</h1>
     
     @form(action = routes.Bookings.create, args = 'id -> "createBookingForm") {
         
-        @inputText(
-            field = createBookingForm("name"),
-            args = '_label -> "Enter name of the conference room ", 'placeholder -> "Ramanujan Conf Room..."
+
+        <dl class=" " id="room_id_field">
+           <p>Select conference room</p>
+           <dd><select id="room_id">
+           @for(room <- rooms) {
+               <option value="@room.Id">@room.Name</option>
+           }
+           </select></dd>
+        </dl>
+
+
+
+
+       @inputText(
+            field = createBookingForm("start_date"),
+            args = '_label -> "Enter Start Date "
         )
 
+        @inputText(
+            field = createBookingForm("end_date"),
+            args = '_label -> "Enter End Date "
+        )
+
+        @inputText(
+            field = createBookingForm("emp_id"),
+            args = '_label -> "Enter Employee ID  ", 'placeholder -> "eg. 2211 "
+        )
+        @textarea(
+            field = createBookingForm("purpose"),
+            args = '_label -> "Enter Purpose ", 'placeholder -> "Short description of meeting.. "
+        )
+
+        @select(
+            field = createBookingForm("num_participants"), 
+            options = options(
+                    "1" -> "1",               
+                    "2" -> "2",              
+                    "3" -> "3",               
+                    "4" -> "4",               
+                    "5" -> "5",           
+                    "6" -> "6",           
+                    "7" -> "7",           
+                    "8" -> "8",           
+                    "9" -> "9",           
+                    "10" -> "10"           
+            ),
+            args = '_label -> "Enter Number of Participants "
+        )
+        @textarea(
+            field = createBookingForm("details"),
+            args = '_label -> "Enter Purpose ", 'placeholder -> "Short description of meeting.. "
+        )
+
+
         <p class="buttons">
-            <input type="submit" value = "create form">
+            <input type="submit" value = "create booking">
         <p>
         
     }
