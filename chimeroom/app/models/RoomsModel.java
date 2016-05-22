@@ -29,7 +29,7 @@ public class RoomsModel extends Model {
     public static Finder<Long, RoomsModel> find = new Finder<Long, RoomsModel>(Long.class, RoomsModel.class);
 
     public static List<RoomsModel> getAll() {
-        return find.where().eq("status", "active").findList();
+        return find.where().ne("status", "under-repair").findList();
     }
 
     public static RoomsModel create(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {

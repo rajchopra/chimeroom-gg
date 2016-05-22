@@ -5,7 +5,7 @@ import time
 import smtplib
 
 host = "localhost"
-user = "chin"
+user = "root"
 password = "pass"
 db = "chimeroom"
 dbC = ""
@@ -26,7 +26,7 @@ def notify_success(name, email, roomid, roomname):
     smtpObj = smtplib.SMTP('localhost')
     smtpObj.sendmail(sender, receivers, message)
 
-def notify_failure(name, email, roomid, roomname):
+def notify_failure(name, email):
     sender = 'govind@exotel.in'
     receivers = [email]
 
@@ -72,6 +72,7 @@ def process():
                 print "We dont have available rooms. Lets tell them the same."
                 print "Booking is confirmed for Name:" + name + "; Email: " + email + ";  BookingId : " + str(bId)
                 notify_failure(name, email)
+                continue
             else:
                 print "No rooms available as of now. Moving on."
                 continue
@@ -84,7 +85,7 @@ def process():
             rName = r[1]
             c.execute("update rooms set status = 'booked' where id = " + str(rId))
 
-        c.execute("update bookings set room_id = " + str(rId)  + " , status = 'success' where id = "  + str(bId))
+        c.execute("update bookings set room_id = " + str(rId)  + ", status = 'success' where id = " + str(bId))
         print "Booking is confirmed for Name:" + name + "; Email: " + email + "; RoomId :" + str(rId) + "; RoomName:" + rName + "; BookingId : " + str(bId)
         notify_success(name, email, rId, rName)
         
@@ -104,5 +105,5 @@ def deallocate_rooms():
 while (1):
     deallocate_rooms()
     process()
-    print "Sleeping for 30s before next run."
-    time.sleep(30)
+    print "Sleeping for 10s before next run."
+    time.sleep(10)
