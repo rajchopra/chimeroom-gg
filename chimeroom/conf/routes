@@ -13,6 +13,18 @@ GET     /delete                 controllers.Application.delete()
 
 # For ConfRoom
 GET     /getrooms                   controllers.Rooms.getRooms()
-GET     /create                     controllers.Rooms.createindex()
-POST    /create                     controllers.Rooms.create()
+GET     /createroom                 controllers.Rooms.createindex()
+POST    /createroom                 controllers.Rooms.create()
+GET     /modifyroom                 controllers.Rooms.modifyindex()
 POST    /modifyroom                 controllers.Rooms.modify()
+GET     /deleteroom                 controllers.Rooms.deleteindex()
+POST    /deleteroom                 controllers.Rooms.delete()
+
+#For Bookings
+GET     /getbookings        controller.Bookings.get()
+GET     /createbooking      controller.Bookings.createindex()
+POST    /createbooking      controller.Bookings.create()
+GET     /modifybooking      controller.Bookings.modifyindex()
+POST    /modifybooking      controller.Bookings.modify()
+GET     /deletebooking      controller.Bookings.deleteindex()
+POST    /deletebooking      controller.Bookings.delete()
