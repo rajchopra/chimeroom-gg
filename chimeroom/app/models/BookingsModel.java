@@ -30,7 +30,7 @@ public class BookingsModel extends Model {
     public String Purpose;
 
     @Column(name="num_participants")
-    public Int NumParticipants;
+    public Long NumParticipants;
     
     public String Details;
 
@@ -44,7 +44,7 @@ public class BookingsModel extends Model {
         return find.where().eq("start_date", StartDate).eq("end_date", EndDate).eq("room_id", RoomId).findList();
     }
 
-    public static BookingsModel create(Long RoomId, Date StartDate, Date EndDate, Long EmpId, String Purpose, Int NumParticipants, String Details) {
+    public static BookingsModel create(Long RoomId, Date StartDate, Date EndDate, Long EmpId, String Purpose, Long NumParticipants, String Details) {
 	BookingsModel b = new BookingsModel();
 	b.RoomId = RoomId;
 	b.StartDate = StartDate;
@@ -58,7 +58,7 @@ public class BookingsModel extends Model {
         return b;
     }
 
-    public static BookingsModel modify(Long Id, Long RoomId, Date StartDate, Date EndDate, Long EmpId, String Purpose, Int NumParticipants, String Details, String Status) {
+    public static BookingsModel modify(Long Id, Long RoomId, Date StartDate, Date EndDate, Long EmpId, String Purpose, Long NumParticipants, String Details, String Status) {
 	b = find.byId(Id);
 	b.RoomId = RoomId;
 	b.StartDate = StartDate;

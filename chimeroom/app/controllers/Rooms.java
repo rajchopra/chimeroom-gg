@@ -37,7 +37,7 @@ public class Rooms extends Controller {
     //GET to createroom() -> render form
     public static Result createindex() {
         return ok(
-            createconfroomform.render(form(ConfRoom.class))
+            createroomform.render(form(ConfRoom.class))
         );
     }
 
@@ -46,7 +46,7 @@ public class Rooms extends Controller {
         Form<ConfRoom> form = form(ConfRoom.class).bindFromRequest();
         ConfRoom d = null;
         if(form.hasErrors()) {
-            return badRequest(createconfroomform.render(form));
+            return badRequest(createroomform.render(form));
         } 
         d = form.get();
         Facilities f = new Facilities(d.whiteboard, d.projector, d.internet, d.wifi, d.intercom, d.teleconferencing, d.videoconferencing);
