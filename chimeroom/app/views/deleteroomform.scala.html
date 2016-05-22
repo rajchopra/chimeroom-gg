@@ -1,0 +1,22 @@
+@(deleteConfRoomForm: Form[controllers.Rooms.ConfRoom])
+
+@import helper._
+
+@main(title = "The 'delete Conference Room' application") {
+    
+    <h1>Enter Details to Delete a new Conference Room</h1>
+    
+    @form(action = routes.Rooms.delete, args = 'id -> "deleteConfRoomForm") {
+        
+        @inputText(
+            field = deleteConfRoomForm("id"),
+            args = '_label -> "Enter id of the conference room ", 'placeholder -> "Ramanujan Conf Room..."
+        )
+
+        <p class="buttons">
+            <input type="submit">
+        <p>
+        
+    }
+    
+}

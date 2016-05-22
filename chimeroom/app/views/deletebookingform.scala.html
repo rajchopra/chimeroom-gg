@@ -1,0 +1,22 @@
+@(deleteBookingForm: Form[controllers.Bookings.BookingForm])
+
+@import helper._
+
+@main(title = "The 'delete Booking' application") {
+    
+    <h1>Enter Details to Modify a new Conference Room</h1>
+    
+    @form(action = routes.Bookings.delete, args = 'id -> "deleteBookingForm") {
+        
+        @inputText(
+            field = deleteBookingForm("id"),
+            args = '_label -> "Enter name of the conference room ", 'placeholder -> "Ramanujan Conf Room..."
+        )
+
+        <p class="buttons">
+            <input type="submit" value = "create form">
+        <p>
+        
+    }
+    
+}

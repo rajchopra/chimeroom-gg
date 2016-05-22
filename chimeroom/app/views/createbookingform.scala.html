@@ -1,0 +1,22 @@
+@(createBookingForm: Form[controllers.Bookings.BookingForm])
+
+@import helper._
+
+@main(title = "The 'create Booking' application") {
+    
+    <h1>Enter Details to Create a new Conference Room</h1>
+    
+    @form(action = routes.Bookings.create, args = 'id -> "createBookingForm") {
+        
+        @inputText(
+            field = createBookingForm("name"),
+            args = '_label -> "Enter name of the conference room ", 'placeholder -> "Ramanujan Conf Room..."
+        )
+
+        <p class="buttons">
+            <input type="submit" value = "create form">
+        <p>
+        
+    }
+    
+}

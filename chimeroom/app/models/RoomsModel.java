@@ -32,7 +32,7 @@ public class RoomsModel extends Model {
         return find.where().eq("status", "active").findList();
     }
 
-    public static RoomsModel createRoom(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
+    public static RoomsModel create(String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities) {
         RoomsModel room = new RoomsModel();
         room.Name = Name;
         room.Capacity = Capacity;
@@ -44,7 +44,7 @@ public class RoomsModel extends Model {
         return room;
     }
 
-    public static RoomsModel modifyRoom(Long Id, String Name, Long Capacity, String Floor, String Status, Long AccessLevel, String Facilities) {
+    public static RoomsModel modify(Long Id, String Name, Long Capacity, String Floor, Long AccessLevel, String Facilities, String Status) {
         RoomsModel room = find.byId(Id);
         room.Name = Name;
         room.Capacity = Capacity;
@@ -56,7 +56,7 @@ public class RoomsModel extends Model {
         return room;
     }
 
-    public static void deleteRoom(Long Id) {
+    public static void delete(Long Id) {
         RoomsModel room = find.byId(Id);
         room.delete();
         return;

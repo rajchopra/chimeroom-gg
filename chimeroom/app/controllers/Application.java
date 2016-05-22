@@ -18,8 +18,4 @@ public class Application extends Controller {
         return ok(homepage.render(txt));
     }
 
-    public static Result delete() {
-        return ok(deleteroom.render("Oops!! We feel sorry that you want to delete the room.", "Hello"));
-    }
-
 }

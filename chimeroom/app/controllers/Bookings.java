@@ -43,13 +43,13 @@ public class Bookings extends Controller {
             return badRequest(createbookingform.render(form));
         } 
         f = form.get();
-        BookingModel b = BookingModel.create(f.RoomId, f.StartDate, f.EndDate, f.EndDate, f.EmpId, f.Purpose, f.NumParticipants, f.AdditionalInfo);
+        BookingsModel b = BookingsModel.create(f.RoomId, f.StartDate, f.EndDate, f.EmpId, f.Purpose, f.NumParticipants, f.AdditionalInfo);
         return ok(index.render("Your booking has been received"));
     }
 
     public static Result get() {
-        List<BookingsModel> b = BookingsModel.getAll();
-        return ok(hello.render("Find all bookings: ", r.get(0).Id));
+        List<BookingsModel> b = BookingsModel.get(new Long(1));
+        return ok(getbookings.render(b));
     }
 
     //GET to modifybooking() -> render form
@@ -67,8 +67,8 @@ public class Bookings extends Controller {
             return badRequest(modifybookingform.render(form)); //TODO: CHange this to modify form
         }
         f = form.get();
-        BookingsModel b = BookingsModel.modify(f.Id, f.RoomId, f.StartDate, f.EndDate, f.EndDate, f.EmpId, f.Purpose, f.NumParticipants, f.AdditionalInfo, f.Status);
-        return ok(hello.render("Modify Success")); //TODO: Change this
+        BookingsModel b = BookingsModel.modify(f.Id, f.RoomId, f.StartDate, f.EndDate, f.EmpId, f.Purpose, f.NumParticipants, f.AdditionalInfo, f.Status);
+        return ok(hello.render("Modify Success", "title")); //TODO: Change this
     }
 
     //GET to deletebooking() -> render form
@@ -86,8 +86,8 @@ public class Bookings extends Controller {
             return badRequest(deletebookingform.render(form)); //TODO: CHange this to modify form
         }
         f = form.get();
-        BookingsModel b = BookingsModel.delete(f.Id);
-        return ok(hello.render("Delete Success")); //TODO: Change this
+        BookingsModel.delete(f.Id);
+        return ok(hello.render("Delete Success", "Title")); //TODO: Change this
     }
 
 }

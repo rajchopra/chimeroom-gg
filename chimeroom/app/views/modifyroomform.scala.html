@@ -1,0 +1,128 @@
+@(modifyConfRoomForm: Form[controllers.Rooms.ConfRoom])
+
+@import helper._
+
+@main(title = "The 'modify Conference Room' application") {
+    
+    <h1>Enter Details to Modify a new Conference Room</h1>
+    
+    @form(action = routes.Rooms.modify, args = 'id -> "modifyConfRoomForm") {
+        
+        @inputText(
+            field = modifyConfRoomForm("name"),
+            args = '_label -> "Enter name of the conference room ", 'placeholder -> "Ramanujan Conf Room..."
+        )
+
+        @inputText(
+            field = modifyConfRoomForm("capacity"),
+            args = '_label -> "Enter capacity ", 'size -> 3, 'placeholder -> 4
+        )
+        
+        @select(
+            field = modifyConfRoomForm("floor"), 
+            options = options(
+                    "1" -> "1",               
+                    "2" -> "2",              
+                    "3" -> "3",               
+                    "4" -> "4",               
+                    "5" -> "5"               
+            ),
+            args = '_label -> "Enter Floor Number "
+        )
+
+        @select(
+            field = modifyConfRoomForm("accesslevel"), 
+            options = options(
+                    "1" -> "1",               
+                    "2" -> "2",              
+                    "3" -> "3",               
+                    "4" -> "4",               
+                    "5" -> "5"               
+            ),
+            args = '_label -> "Enter Minimum Access Level "
+        )
+
+
+        @select(
+            field = modifyConfRoomForm("status"), 
+            options = options(
+                    "open" -> "open",
+                    "close" -> "close"
+            ),
+            args = '_label -> "Select Status "
+        )
+
+
+
+        @select(
+            field = modifyConfRoomForm("whiteboard"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "whiteboard facility available?? "
+        )
+
+        @select(
+            field = modifyConfRoomForm("projector"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "projector facility available?? "
+        )
+
+        @select(
+            field = modifyConfRoomForm("internet"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "internet facility available?? "
+        )
+
+        @select(
+            field = modifyConfRoomForm("wifi"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "wifi facility available?? "
+        )
+
+        @select(
+            field = modifyConfRoomForm("intercom"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "intercom facility available?? "
+        )
+
+        @select(
+            field = modifyConfRoomForm("teleconferencing"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "teleconferencing facility available?? "
+        )
+
+        @select(
+            field = modifyConfRoomForm("videoconferencing"), 
+            options = options(
+                    "available" -> "yes",
+                    "not available" -> "no"
+            ),
+            args = '_label -> "videoconferencing facility available?? "
+        )
+
+
+
+        <p class="buttons">
+            <input type="submit">
+        <p>
+        
+    }
+    
+}

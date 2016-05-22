@@ -9,7 +9,6 @@ GET     /                           controllers.Application.index()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 GET     /home                   controllers.Application.home()
-GET     /delete                 controllers.Application.delete()
 
 # For ConfRoom
 GET     /getrooms                   controllers.Rooms.getRooms()

@@ -36,8 +36,8 @@ public class BookingsModel extends Model {
 
     public static Finder<Long, BookingsModel> find = new Finder<Long, BookingsModel>(Long.class, BookingsModel.class);
 
-    public static BookingsModel get(Long Id) {
-        return find.byId(Id);
+    public static List<BookingsModel> get(Long Id) {
+        return find.all();
     }
 
     public static List<BookingsModel> getAll(Date StartDate, Date EndDate, Long RoomId) {
@@ -59,7 +59,7 @@ public class BookingsModel extends Model {
     }
 
     public static BookingsModel modify(Long Id, Long RoomId, Date StartDate, Date EndDate, Long EmpId, String Purpose, Long NumParticipants, String Details, String Status) {
-	b = find.byId(Id);
+	BookingsModel b = find.byId(Id);
 	b.RoomId = RoomId;
 	b.StartDate = StartDate;
 	b.EndDate = EndDate;

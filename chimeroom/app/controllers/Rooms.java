@@ -50,7 +50,7 @@ public class Rooms extends Controller {
         } 
         d = form.get();
         Facilities f = new Facilities(d.whiteboard, d.projector, d.internet, d.wifi, d.intercom, d.teleconferencing, d.videoconferencing);
-        RoomsModel r = RoomsModel.createRoom(d.name, d.capacity, d.floor, d.accesslevel, f.toJsonString());
+        RoomsModel r = RoomsModel.create(d.name, d.capacity, d.floor, d.accesslevel, f.toJsonString());
         return ok(index.render("Room successfully created."));
     }
 
@@ -75,7 +75,7 @@ public class Rooms extends Controller {
         } 
         d = form.get();
         Facilities f = new Facilities(d.whiteboard, d.projector, d.internet, d.wifi, d.intercom, d.teleconferencing, d.videoconferencing);
-        RoomsModel r = RoomsModel.modifyRoom(d.id, d.name, d.capacity, d.floor, d.accesslevel, f.toJsonString());
+        RoomsModel r = RoomsModel.modify(d.id, d.name, d.capacity, d.floor, d.accesslevel, f.toJsonString(), d.status);
         return ok(index.render("Modify Success")); //TODO: Change this
     }
 
@@ -94,7 +94,7 @@ public class Rooms extends Controller {
             return badRequest(deleteroomform.render(form));
         } 
         d = form.get();
-        RoomsModel.deleteRoom(d.id);
+        RoomsModel.delete(d.id);
         return ok(index.render("Delete Success")); //TODO: Change this
     }
 
